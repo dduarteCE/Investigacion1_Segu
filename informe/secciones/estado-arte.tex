@@ -1,10 +1,43 @@
 \section{Desarrollo y estado del arte}
 \label{sec:estado-arte}
 
-\TODO{Presenten una síntesis cruzada, no cinco resúmenes aislados. Organicen los trabajos por enfoques, amenazas, métodos, resultados o defensas. Cada afirmación tomada de una fuente debe citarse con el estilo IEEE, por ejemplo \cite{ejemplo-academico}.}
+
+Además de esto, la transición hacia criptografía poscuántica puede analizarse desde dos líneas complementarias: la preparación organizacional para la migración y la adopción 
+técnica de mecanismos resistentes a ataques cuánticos en sistemas reales. En la primera línea, CISA, NSA y NIST plantean la necesidad de iniciar la preparación 
+antes de disponer de computadores cuánticos criptográficamente relevantes, debido especialmente al riesgo de ataques de tipo \textit{harvest now, decrypt later}, en los que información cifrada actualmente puede almacenarse para ser 
+descifrada en el futuro \cite{cisa2023quantum}. Para ello, proponen la creación de hojas de ruta de preparación cuántica, inventarios criptográficos, análisis de riesgo y coordinación con proveedores tecnológicos.
+
+La segunda línea corresponde a la implementación y evaluación práctica de estas medidas. Westerbaan analiza el estado de la adopción de criptografía poscuántica en Internet durante 2025 y muestra que la migración del acuerdo de claves ha 
+alcanzado un grado considerable de madurez, particularmente mediante esquemas híbridos como X25519MLKEM768 \cite{westerbaan2025postquantum}. Sin embargo, la 
+migración de firmas digitales y certificados continúa presentando mayores dificultades debido al tamaño de las claves y firmas, el consumo de ancho de banda y los problemas de compatibilidad y rendimiento.
+
+En conjunto, ambos trabajos muestran una evolución desde la planificación de la migración hacia su despliegue efectivo. Las recomendaciones organizacionales de 
+inventariar dependencias criptográficas y comenzar la transición con anticipación \cite{cisa2023quantum} se reflejan posteriormente en los problemas encontrados durante despliegues reales, donde la compatibilidad con infraestructura existente, 
+las dependencias de software y la actualización de sistemas se convierten en factores determinantes para la adopción \cite{westerbaan2025postquantum}.
 
 \subsection{Líneas de trabajo identificadas}
-\TODO{Comparen qué problema aborda cada trabajo, qué método utiliza, qué datos o entorno emplea y qué encuentra. Señalen patrones y diferencias entre los resultados.}
+
+CISA, NSA y NIST se concentran en el problema de cómo preparar a una organización para sustituir los mecanismos de criptografía de clave pública que serían vulnerables ante un computador cuántico criptográficamente relevante. 
+Entre estos mecanismos se encuentran RSA, ECDH y ECDSA 
+\cite{cisa2023quantum}. Su enfoque no consiste en realizar una evaluación experimental de algoritmos, sino en proponer un proceso de gestión de la migración basado en descubrimiento criptográfico, elaboración de inventarios, evaluación de riesgos, priorización de activos y coordinación con proveedores.
+
+Westerbaan, por su parte, estudia el mismo problema desde el despliegue operativo de criptografía poscuántica en Internet. El trabajo analiza la evolución de la adopción en navegadores, servidores e infraestructura de Cloudflare, además de 
+experiencias previas de implementación en TLS \cite{westerbaan2025postquantum}. 
+Una de las estrategias utilizadas consiste en el acuerdo de claves híbrido X25519MLKEM768, que combina un mecanismo clásico con ML-KEM-768 para conservar seguridad clásica mientras se añade resistencia frente a futuros ataques cuánticos.
+
+Los resultados permiten observar una diferencia importante entre los distintos 
+componentes de la migración. Para el acuerdo de claves, Westerbaan reporta que 
+más del 50\,\% del tráfico humano observado por Cloudflare ya empleaba protección 
+poscuántica en octubre de 2025, por lo que este mecanismo comienza a considerarse 
+una nueva línea base de seguridad para la Web \cite{westerbaan2025postquantum}. 
+No obstante, la adopción no es uniforme: el soporte poscuántico en los servidores 
+de origen observados por Cloudflare alcanzaba únicamente un 3.7\,\%, evidenciando 
+una mayor dificultad para actualizar infraestructura heterogénea.
+
+La migración de firmas y certificados presenta un escenario diferente. Los esquemas de firma poscuántica introducen claves y firmas de mayor tamaño que las alternativas clásicas, lo que incrementa los datos transmitidos durante el establecimiento de conexiones. Por esta razón, Westerbaan considera que la ruta 
+hacia la autenticación poscuántica es menos directa que la del acuerdo de claves 
+\cite{westerbaan2025postquantum}. Este resultado complementa las recomendaciones de CISA, NSA y NIST, ya que confirma que la migración no consiste únicamente en sustituir algoritmos, sino en identificar dependencias, evaluar impactos y planificar actualizaciones de infraestructura, productos y proveedores 
+\cite{cisa2023quantum}.
 
 \input{secciones/matriz-revision}
 
