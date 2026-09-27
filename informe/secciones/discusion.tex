@@ -2,10 +2,63 @@
 \label{sec:discusion}
 
 \subsection{Contradicciones y vacíos}
-\TODO{Analicen las contradicciones entre los trabajos, los resultados que dependen del entorno y los vacíos de investigación. No se limiten a enumerar limitaciones: expliquen su efecto sobre la seguridad o sobre la aplicabilidad de las propuestas.}
+
+Las fuentes revisadas no presentan contradicciones directas sobre la necesidad de migrar hacia criptografía poscuántica, pero sí muestran diferencias importantes entre las recomendaciones estratégicas y el grado de madurez práctica de la transición. Joseph et al. recomiendan adoptar \textit{crypto-agility} mediante abstracciones, bibliotecas criptográficas centralizadas y sistemas preparados para cambiar algoritmos con bajo impacto \cite{joseph2022transitioning}. Sin embargo, la revisión sistemática de Näther et al. encuentra que la literatura todavía no posee una definición uniforme de \textit{crypto-agility} y que las propuestas concretas para implementarla son heterogéneas \cite{naether2024migrating}. Por tanto, un vacío relevante no es reconocer su importancia, sino convertirla en prácticas y criterios suficientemente claros para evaluar si un sistema es realmente \textit{crypto-agile}.
+
+Los mecanismos híbridos ilustran otra tensión. Joseph et al. los presentan como una estrategia para reducir el riesgo de depender inmediatamente de algoritmos poscuánticos relativamente nuevos, combinando componentes clásicos y poscuánticos \cite{joseph2022transitioning}. Näther et al. confirman que estas soluciones aparecen con frecuencia en las migraciones estudiadas, pero también recogen el riesgo de ataques de \textit{downgrade}, en los que un adversario intenta desviar la comunicación hacia algoritmos clásicos \cite{naether2024migrating}. Esto no invalida el enfoque híbrido, pero muestra que la compatibilidad hacia atrás debe diseñarse con cuidado: mantener una alternativa clásica puede facilitar la transición y, al mismo tiempo, conservar una ruta vulnerable si la negociación o selección de algoritmos no está protegida adecuadamente.
+
+% Aporte pendiente del Integrante 5:
+% Añadir aquí, si corresponde, contradicciones o vacíos identificados en CISA/NSA/NIST
+% y Westerbaan sin repetir la descripción ya incluida en el estado del arte.
 
 \subsection{Conexión con el curso}
-\TODO{Relacionen explícitamente los hallazgos con la tríada CID: confidencialidad, integridad y disponibilidad. Conecten además con al menos un principio, política o control visto en clase e indiquen qué evidencia de la literatura respalda la conexión.}
+
+Los hallazgos se relacionan directamente con la tríada de
+\textbf{confidencialidad, integridad y disponibilidad (CID)}. En
+confidencialidad, el riesgo \textit{store now, decrypt later} descrito por
+Joseph et al. muestra que información capturada hoy podría ser descifrada
+en el futuro ante avances en computación cuántica
+\cite{joseph2022transitioning}. FIPS 203 responde a esta amenaza mediante
+ML-KEM, que permite establecer secretos compartidos para su posterior uso
+con criptografía simétrica \cite{nist2024fips203}.
+
+En integridad y autenticidad, FIPS 204 y FIPS 205 estandarizan ML-DSA y
+SLH-DSA como mecanismos de firma digital poscuántica
+\cite{nist2024fips204,nist2024fips205}. Joseph et al. destacan además la
+importancia de proteger las firmas en sistemas difíciles de actualizar,
+pues estas pueden utilizarse posteriormente para distribuir actualizaciones
+confiables \cite{joseph2022transitioning}.
+
+La disponibilidad también puede verse afectada durante la transición.
+Näther et al. identifican mayores requisitos de hardware y rendimiento,
+además de la necesidad de mantener interoperabilidad entre sistemas
+\cite{naether2024migrating}. Por ello, una migración que introduzca
+incompatibilidades o degradaciones importantes puede mejorar la resistencia
+criptográfica y, simultáneamente, afectar la disponibilidad.
+
+Finalmente, los roles de migración propuestos por Näther et al., como
+\textit{Migration Manager}, \textit{Asset \& Risk Manager},
+\textit{Security Expert} y \textit{Developer/Administrator}, pueden
+relacionarse con los temas de control de acceso y asignación de
+responsabilidades vistos en el curso \cite{naether2024migrating}. Aunque
+no constituyen un modelo RBAC formal, muestran una separación de
+responsabilidades dentro del proceso de migración.
+
+% Aporte pendiente del Integrante 5:
+% Reforzar la conexión con CID, controles o políticas usando sus fuentes.
 
 \subsection{Interpretación del grupo}
-\TODO{Expongan qué lectura propia hace el grupo a partir de la comparación. Distingan con claridad entre resultados reportados por las fuentes e inferencias del grupo.}
+
+Consideramos que disponer de algoritmos poscuánticos estandarizados no
+implica que una organización esté preparada para la transición. El reto
+se desplaza hacia la capacidad de identificar dónde se utiliza
+criptografía vulnerable, priorizar los sistemas según su riesgo y
+dependencias, y sustituir mecanismos sin comprometer la interoperabilidad
+o disponibilidad. Por ello, interpretamos que la preparación para PQC
+debe evaluarse no solo por los algoritmos adoptados, sino también por la
+capacidad de la infraestructura para adaptarse a futuros cambios
+criptográficos \cite{joseph2022transitioning,naether2024migrating,  
+nist2024fips203,nist2024fips204,nist2024fips205}.
+
+% Aporte pendiente del Integrante 5:
+% Integrar aquí los hallazgos derivados de CISA/NSA/NIST y Westerbaan.
