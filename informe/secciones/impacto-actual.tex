@@ -1,6 +1,20 @@
 \section{Impacto actual en tecnologías y organizaciones}
 \label{sec:impacto}
 
-\TODO{Aterricen el tema al presente. Identifiquen empresas, productos, servicios o sectores que ya lo enfrentan. Incluyan al menos un caso real con nombre propio y fecha, y describan un efecto verificable: brecha, cambio de producto, norma, inversión, incidente o decisión organizacional.}
+El impacto de la criptografía poscuántica ya puede observarse en productos de red utilizados en entornos reales y no únicamente en experimentos o procesos de estandarización. Un caso reciente es Cloudflare, que el 30 de abril de 2026
+anunció la disponibilidad general de criptografía poscuántica para su servicio IPsec. La implementación utiliza un intercambio híbrido basado en ML-KEM y fue probada con equipos de red de Fortinet y Cisco, permitiendo proteger conexiones
+WAN mediante hardware existente \cite{goldberg2026ipsec}. Esta decisión muestra que la migración comienza a extenderse más allá de TLS para la Web hacia infraestructura de red empresarial.
 
-\TODO{Citen la fuente primaria o técnica con autoría identificable. Expliquen cómo el caso confirma, matiza o contradice los hallazgos de la Sección~\ref{sec:estado-arte}. Eviten afirmaciones generales sin evidencia.}
+Este caso confirma varios hallazgos de la Sección~\ref{sec:estado-arte}.
+En particular, la recomendación de CISA, NSA y NIST de coordinar la transición con proveedores y considerar las dependencias tecnológicas de la organización \cite{cisa2023quantum} se vuelve relevante cuando la adopción requiere interoperabilidad entre productos de distintos fabricantes. Asimismo, amplía
+lo observado por Westerbaan en 2025: el acuerdo de claves poscuántico ya no se limita a conexiones entre navegadores y servidores web, sino que comienza a incorporarse en servicios de conectividad empresarial
+\cite{westerbaan2025postquantum,goldberg2026ipsec}.
+
+La evolución también alcanza la autenticación. El 29 de julio de 2026, Cloudflare anunció soporte para autenticación poscuántica mediante ML-DSA en sus productos \textit{Authenticated Origin Pulls} y \textit{Custom Origin Trust Store}, permitiendo establecer conexiones TLS mutuamente autenticadas entre Cloudflare y los servidores de origen
+\cite{valenta2026authentication}. Este cambio resulta especialmente relevante porque anteriormente se identificó que la autenticación mediante firmas y certificados presentaba un grado de madurez menor que el establecimiento de
+claves \cite{westerbaan2025postquantum}.
+
+El despliegue también evidenció riesgos propios de una migración sobre infraestructura existente. Durante la actualización de la biblioteca BoringSSL, un cambio en la validación del campo \textit{KeyUsage} de los certificados
+provocó que un pequeño número de certificados de clientes fueran considerados inválidos, generando un incidente el 10 de junio de 2026. Cloudflare revirtió el cambio y posteriormente introdujo una corrección antes de continuar el despliegue \cite{valenta2026authentication}. El caso confirma que adoptar
+algoritmos poscuánticos no elimina los problemas de compatibilidad, interoperabilidad y sistemas heredados identificados en la literatura; incluso una mejora criptográfica puede producir efectos sobre la disponibilidad si las
+dependencias existentes no se consideran durante la migración.

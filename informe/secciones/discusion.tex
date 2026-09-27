@@ -7,9 +7,11 @@ Las fuentes revisadas no presentan contradicciones directas sobre la necesidad d
 
 Los mecanismos híbridos ilustran otra tensión. Joseph et al. los presentan como una estrategia para reducir el riesgo de depender inmediatamente de algoritmos poscuánticos relativamente nuevos, combinando componentes clásicos y poscuánticos \cite{joseph2022transitioning}. Näther et al. confirman que estas soluciones aparecen con frecuencia en las migraciones estudiadas, pero también recogen el riesgo de ataques de \textit{downgrade}, en los que un adversario intenta desviar la comunicación hacia algoritmos clásicos \cite{naether2024migrating}. Esto no invalida el enfoque híbrido, pero muestra que la compatibilidad hacia atrás debe diseñarse con cuidado: mantener una alternativa clásica puede facilitar la transición y, al mismo tiempo, conservar una ruta vulnerable si la negociación o selección de algoritmos no está protegida adecuadamente.
 
-% Aporte pendiente del Integrante 5:
-% Añadir aquí, si corresponde, contradicciones o vacíos identificados en CISA/NSA/NIST
-% y Westerbaan sin repetir la descripción ya incluida en el estado del arte.
+Aparece además un vacío entre la preparación organizacional y la verificación de que una migración sea realmente efectiva.
+CISA, NSA y NIST establecen actividades necesarias para alcanzar la preparación poscuántica, pero no definen criterios cuantitativos o pruebas concretas que
+permitan determinar cuándo una organización puede considerarse suficientemente preparada \cite{cisa2023quantum}. Por otra parte, Westerbaan aporta evidencia operativa sobre despliegues reales, pero sus resultados corresponden a un entorno tecnológico específico y no constituyen un marco general para evaluar
+la preparación de otras organizaciones \cite{westerbaan2025postquantum}.
+
 
 \subsection{Conexión con el curso}
 
@@ -36,7 +38,7 @@ además de la necesidad de mantener interoperabilidad entre sistemas
 incompatibilidades o degradaciones importantes puede mejorar la resistencia
 criptográfica y, simultáneamente, afectar la disponibilidad.
 
-Finalmente, los roles de migración propuestos por Näther et al., como
+Además, los roles de migración propuestos por Näther et al., como
 \textit{Migration Manager}, \textit{Asset \& Risk Manager},
 \textit{Security Expert} y \textit{Developer/Administrator}, pueden
 relacionarse con los temas de control de acceso y asignación de
@@ -44,8 +46,11 @@ responsabilidades vistos en el curso \cite{naether2024migrating}. Aunque
 no constituyen un modelo RBAC formal, muestran una separación de
 responsabilidades dentro del proceso de migración.
 
-% Aporte pendiente del Integrante 5:
-% Reforzar la conexión con CID, controles o políticas usando sus fuentes.
+Las recomendaciones de CISA, NSA y NIST pueden relacionarse con el proceso visto en el curso para convertir un principio de seguridad en una política, un procedimiento, un control y finalmente una métrica. La preparación poscuántica parte de una amenaza futura y requiere que la organización identifique los activos y mecanismos criptográficos expuestos, evalúe su
+riesgo y establezca acciones de migración \cite{cisa2023quantum}. Desde esta perspectiva, la transición a PQC no es únicamente una decisión técnica sobre qué algoritmo utilizar, sino un problema de política de seguridad: deben definirse responsabilidades, prioridades y procedimientos verificables para reducir progresivamente el riesgo asociado con la criptografía vulnerable.
+
+Finalmente, el despliegue descrito por Westerbaan se relaciona directamente con la seguridad del canal estudiada en el curso. TLS no depende de un único mecanismo criptográfico, sino de la combinación de mecanismos que aportan confidencialidad, integridad y autenticidad. La incorporación de X25519MLKEM768 modifica específicamente el establecimiento de claves con el
+que se protege la confidencialidad de la comunicación, mientras que las dificultades pendientes en firmas y certificados afectan el mecanismo con el que se autentica al otro extremo \cite{westerbaan2025postquantum}. 
 
 \subsection{Interpretación del grupo}
 
@@ -60,5 +65,8 @@ capacidad de la infraestructura para adaptarse a futuros cambios
 criptográficos \cite{joseph2022transitioning,naether2024migrating,  
 nist2024fips203,nist2024fips204,nist2024fips205}.
 
-% Aporte pendiente del Integrante 5:
-% Integrar aquí los hallazgos derivados de CISA/NSA/NIST y Westerbaan.
+Los hallazgos de CISA, NSA y NIST y de Westerbaan refuerzan nuestra interpretación de que la preparación poscuántica debe entenderse como una capacidad de adaptación de toda la infraestructura. El inventario criptográfico, la priorización basada en riesgo y la coordinación con proveedores permiten identificar qué debe migrarse y en qué orden \cite{cisa2023quantum}, pero la experiencia de despliegue muestra que la existencia de algoritmos y soporte de software no garantiza una adopción uniforme \cite{westerbaan2025postquantum}.
+
+Consideramos, por tanto, que una organización preparada para PQC no es únicamente aquella que
+puede utilizar algoritmos poscuánticos, sino aquella que conoce sus dependencias criptográficas y puede actualizar sus componentes sin introducir fallos de compatibilidad, degradaciones inaceptables o nuevas dependencias difíciles de
+migrar.
