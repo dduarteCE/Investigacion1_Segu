@@ -4,7 +4,14 @@
 \begin{quote}
 Identifica el problema complejo de ingeniería a investigar.
 \end{quote}
-\emph{En el PDF IN: qué problema concreto del tema emergente asignado investigan y por qué importa ahora.}
 
 \subsection*{Respuesta del grupo}
-\TODO{Describan el problema concreto, sus actores, activos, amenazas y relevancia actual. Vinculen la respuesta con la Introducción y señalen la sección o evidencia que lo respalda.}
+El problema complejo investigado es la \textbf{migración de la infraestructura de clave pública hacia criptografía poscuántica (PQC)}. RSA, las curvas elípticas y Diffie-Hellman protegen hoy el establecimiento de claves y las firmas de TLS, VPN, certificados y actualizaciones de software. Una computadora cuántica suficientemente grande podría romperlos con el algoritmo de Shor.
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Por qué importa ahora:} aunque esa computadora todavía no existe, un adversario puede capturar hoy tráfico cifrado y descifrarlo en el futuro (\textit{store now, decrypt later}). Todo dato que deba seguir siendo secreto durante años ya está expuesto.
+  \item \textbf{Qué cambió:} en agosto de 2024 el NIST publicó FIPS 203 (ML-KEM), FIPS 204 (ML-DSA) y FIPS 205 (SLH-DSA). Desde 2025 hay despliegues a gran escala. El problema dejó de ser qué algoritmo usar y pasó a ser cómo migrar.
+  \item \textbf{Por qué es complejo:} la migración involucra muchos actores (organizaciones, proveedores de software y hardware, autoridades de certificación) y activos (canales TLS e IPsec, PKI, firmware y datos de larga vida). Exige inventariar dónde se usa criptografía vulnerable, priorizar según el riesgo y sustituirla sin romper la interoperabilidad ni la disponibilidad. Además afecta las tres propiedades de la tríada CID.
+\end{itemize}
+
+\textbf{Evidencia en el informe:} Sección I (Introducción) y Sección III (estado del arte, en particular Joseph et al. y CISA, NSA y NIST).

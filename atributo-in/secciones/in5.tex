@@ -4,7 +4,23 @@
 \begin{quote}
 Elabora conclusiones a partir de la síntesis y análisis de los resultados de la investigación.
 \end{quote}
-\emph{En el PDF IN: conclusiones de conjunto (estado del arte, vacíos, implicaciones, e impacto actual en tecnologías u organizaciones) coherentes con IN1–IN4.}
 
 \subsection*{Respuesta del grupo}
-\TODO{Formulen conclusiones de conjunto y conéctenlas explícitamente con IN1--IN4. Incluyan estado del arte, vacíos, implicaciones, impacto actual y límites de lo que pueden afirmar.}
+Las conclusiones (Sección VI del informe) se derivan de IN1--IN4.
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{El riesgo ya existe (IN1).} Por \textit{store now, decrypt later}, la amenaza cuántica es un riesgo presente para la confidencialidad de datos de larga vida.
+  \item \textbf{Los estándares están listos; la migración no (IN3, IN4).} ML-KEM, ML-DSA y SLH-DSA están estandarizados y el acuerdo de claves híbrido ya protege más de la mitad del tráfico humano de Cloudflare. En cambio, las firmas, los certificados y los servidores de origen van rezagados. La demo confirma una de las causas: el tamaño de las firmas.
+  \item \textbf{El reto es de ingeniería y gestión, no de algoritmos (IN4).} Una organización preparada conoce sus dependencias criptográficas y puede cambiarlas sin romper la interoperabilidad ni la disponibilidad. Por eso el inventario criptográfico y la cripto-agilidad son la primera defensa.
+  \item \textbf{Vacíos.} La academia necesita una definición y una métrica comunes de cripto-agilidad. La industria necesita criterios verificables de preparación.
+  \item \textbf{Impacto actual y tendencia.} En 2026 la PQC avanza de la confidencialidad hacia la autenticación y más allá de la Web: IPsec poscuántico con equipos Fortinet y Cisco, y autenticación ML-DSA hacia servidores de origen. El incidente del 10 de junio muestra que la próxima dificultad será mantener la disponibilidad durante estos cambios.
+  \item \textbf{Qué debería vigilar un profesional de seguridad:}
+  \begin{itemize}
+    \item la llegada de certificados poscuánticos a las PKI públicas;
+    \item las hojas de ruta PQC de sus proveedores;
+    \item la protección de la negociación híbrida contra \textit{downgrade};
+    \item el inventario criptográfico de su propia organización.
+  \end{itemize}
+\end{enumerate}
+
+\textbf{Límites de lo que se puede afirmar:} el trabajo se basa en cinco fuentes principales, la evidencia de despliegue proviene de un solo proveedor y la demo mide tamaños, no rendimiento en red. Por eso no se generaliza el grado de adopción a otros sectores ni se cuantifica el impacto en latencia.

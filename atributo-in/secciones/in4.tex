@@ -4,7 +4,36 @@
 \begin{quote}
 Analiza los datos obtenidos en el desarrollo de la investigación.
 \end{quote}
-\emph{En el PDF IN: comparación entre trabajos, contradicciones, limitaciones o riesgos (no solo listar).}
 
 \subsection*{Respuesta del grupo}
-\TODO{Interpreten la matriz y la evidencia de la demo. Comparen métodos y resultados, expliquen contradicciones, limitaciones y riesgos técnicos, y distingan resultados de la literatura de inferencias propias.}
+Las fuentes se analizaron comparándolas entre sí, no una por una (Secciones III y IV del informe), separando lo que afirma la literatura de las inferencias propias del grupo.
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Comparación.} Las fuentes cubren etapas distintas de una misma transición:
+  \begin{itemize}
+    \item preparación estratégica (Joseph et al.; CISA, NSA y NIST);
+    \item proceso de migración en cuatro fases: diagnóstico, planificación, ejecución y mantenimiento (Näther et al.);
+    \item especificación de algoritmos (FIPS 203--205);
+    \item despliegue real (Westerbaan).
+  \end{itemize}
+  Ninguna fuente aislada cubre el problema completo.
+  \item \textbf{Contradicciones y tensiones.}
+  \begin{itemize}
+    \item Joseph et al. recomiendan la cripto-agilidad, pero Näther et al. muestran que no existe una definición uniforme de ese concepto ni una forma común de implementarlo.
+    \item Los esquemas híbridos reducen el riesgo de depender solo de algoritmos nuevos, pero conservan una ruta clásica expuesta a ataques de \textit{downgrade} si la negociación no está protegida.
+  \end{itemize}
+  \item \textbf{Vacíos.} CISA, NSA y NIST describen actividades de preparación, pero no criterios medibles para declarar que una organización está preparada. La evidencia de despliegue proviene de un solo proveedor.
+  \item \textbf{Datos de adopción.} La adopción es desigual:
+  \begin{itemize}
+    \item más de la mitad del tráfico humano de Cloudflare ya usa acuerdo de claves poscuántico;
+    \item solo alrededor del 3.7\,\% de los servidores de origen lo soporta;
+    \item las firmas y los certificados van más atrasados.
+  \end{itemize}
+  \item \textbf{Datos de la demo.} Una firma ML-DSA-65 mide 3309 bytes, unas 50 veces más que una firma Ed25519 (64 bytes, tamaño estándar de referencia; la demo no ejecuta Ed25519). La clave pública mide 1952 bytes frente a 32. Esta medición explica por qué autenticar es más costoso que establecer claves: una cadena TLS transporta varias firmas y claves públicas.
+  \item \textbf{Riesgos (tríada CID).}
+  \begin{itemize}
+    \item Confidencialidad: \textit{store now, decrypt later}.
+    \item Integridad y autenticidad: firmas que deben migrar a ML-DSA o SLH-DSA.
+    \item Disponibilidad: el incidente del 10 de junio de 2026, cuando un cambio en la validación de certificados durante la actualización de BoringSSL invalidó certificados de clientes.
+  \end{itemize}
+\end{itemize}

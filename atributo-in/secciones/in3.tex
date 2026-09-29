@@ -4,7 +4,29 @@
 \begin{quote}
 Ejecuta la metodología del plan de investigación para la obtención de datos relevantes.
 \end{quote}
-\emph{En el PDF IN: cómo aplicaron el plan (lectura, matriz, demo o ejemplo alineado a lo leído).}
 
 \subsection*{Respuesta del grupo}
-\TODO{Documenten qué hizo el grupo: búsquedas, filtrado, lectura, extracción en la matriz, preparación de la demo y recolección de evidencia. Incluyan fechas, roles o enlaces a archivos cuando sean útiles.}
+El plan se ejecutó en cuatro pasos.
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Búsqueda y filtrado (septiembre de 2026).} Se aplicaron las cadenas de búsqueda y se filtró primero por título, resumen, introducción y conclusiones. Luego se leyeron en detalle las fuentes seleccionadas.
+  \item \textbf{Selección de las cinco fuentes principales.}
+  \begin{itemize}
+    \item Académicas: Joseph et al. (\textit{Nature}, 2022) y la revisión sistemática de Näther et al. (\textit{IEEE Access}, 2024), basada en 21 trabajos.
+    \item Técnicas: NIST FIPS 203/204/205 (2024) y la guía \textit{Quantum-Readiness} de CISA, NSA y NIST (2023).
+    \item De actualidad: el reporte de despliegue de Westerbaan en el blog de Cloudflare (2025).
+    \item Casos adicionales para el impacto: dos anuncios de Cloudflare de 2026, sobre IPsec poscuántico (30 de abril) y autenticación ML-DSA hacia servidores de origen, que incluye el incidente del 10 de junio (publicado el 29 de julio).
+  \end{itemize}
+  \item \textbf{Extracción de datos.} Cada fuente se registró en la matriz de revisión (Tabla I del informe) con referencia, problema, método, datos o entorno, hallazgo principal y limitación, redactados por el grupo y no copiados de los abstracts. Las cifras de adopción se verificaron contra el texto original. Por ejemplo, el 3.7\,\% de servidores de origen con soporte poscuántico se confirmó en el artículo de Westerbaan.
+  \item \textbf{Demo en Google Colab con liboqs-python.} Se compiló liboqs y se utilizó ML-DSA-65.
+  \begin{itemize}
+    \item Se generó un par de claves; la clave pública midió \textbf{1952 bytes}.
+    \item Se firmó el mensaje ``Transferir 10000 colones a Bob''; la firma midió \textbf{3309 bytes}.
+    \item Se verificó la firma: resultó válida.
+    \item Se simuló un atacante que cambia el monto a 90000 sin tocar la firma: la verificación falló.
+    \item Como ejercicio opcional, quedó preparado un intercambio con ML-KEM-768.
+  \end{itemize}
+  La demo usa solo datos ficticios en un entorno propio.
+\end{enumerate}
+
+\textbf{Organización del trabajo:} la búsqueda y la redacción se repartieron por secciones del informe. Dos integrantes prepararon la demo. Otro integrante integró el resumen, la introducción, las conclusiones, las diapositivas y este documento.
